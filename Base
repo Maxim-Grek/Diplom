@@ -1,0 +1,70 @@
+import psycopg2
+from pprint import pprint
+
+
+def create_db(cur):
+    cur.execute(" ")
+    cur.execute(" ")
+    return
+
+
+def delete_db(cur):
+    cur.execute(" ")
+
+def insert_client(cur, sex=None, city=None, age=None, status=None):
+    cur.execute("  ", (sex, city, age, status))
+    cur.execute("  ")
+    id = cur.fetchone()[0]
+    if status is None:
+        return id
+    else:
+        insert_status(cur, id, status)
+        return id
+
+
+def update_client(cur, id, sex=None, city=None, age=None, status=None):
+    cur.execute(" ", (id, ))
+    info = cur.fetchone()
+    if sex is None:
+        sex = info[1]
+    if city is None:
+        city = info[2]
+    if age is None:
+        age = info[3]
+    if status is None:
+        status = info[4]
+    cur.execute("  ", (sex, city, age, status, id))
+    return id
+
+def find_client(cur, sex=None, city=None, age=None, status=None):
+    if sex is None:
+        sex = '%'
+    else:
+        sex = '%' + sex + '%'
+    if city is None:
+        city = '%'
+    else:
+        city = '%' + city + '%'
+    if age is None:
+        age = '%'
+    else:
+        age = '%' + age + '%'
+    if status is None:
+        cur.execute("  ", (sex, city, age, status))
+    else:
+        cur.execute("  ", (sex, city, age, status))
+    return cur.fetchall()
+
+
+if __name__ == '__main__':
+    with psycopg2.connect(database="1", user="postgres",
+                          password="123456") as conn:
+        with conn.cursor() as curs:
+            
+            delete_db(curs)
+            
+            create_db(curs)
+            print("БД создана")
+            print('Найден пользователь пола, возрастом из города со статусом:')
+            pprint(find_client(curs, '  ', '   ',
+                               ' ', ' '))
