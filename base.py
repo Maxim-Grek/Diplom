@@ -60,9 +60,8 @@ class VkTools():
                             'name': user['first_name'] + ' ' + user['last_name']
                            }
                            )
-        
+            continue
         return res
-
     def get_photos(self, user_id):
         photos = self.api.method('photos.get',
                                  {'user_id': user_id,
@@ -86,7 +85,7 @@ class VkTools():
                         )
             
         res.sort(key=lambda x: x['likes']+x['comments']*10, reverse=True)
-
+         
         return res
 
 
