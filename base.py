@@ -37,7 +37,7 @@ class VkTools():
         age_to = age + 5
 
         users = self.api.method('users.search',
-                                {'count': 10,
+                                {'count': 30,
                                  'offset': 0,
                                  'age_from': age_from,
                                  'age_to': age_to,
@@ -55,7 +55,7 @@ class VkTools():
         res = []
 
         for user in users:
-            if user['is_closed'] == False:
+            if user['is_closed'] == True:
                 res.append({'id' : user['id'],
                             'name': user['first_name'] + ' ' + user['last_name']
                            }
