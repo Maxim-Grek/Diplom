@@ -98,10 +98,7 @@ class VkTools():
             for event in self.longpoll.listen():
              if event.type == VkEventType.MESSAGE_NEW and event.to_me:
                     age = event.text
-                    self.input_looking_age(user_id, age)
-                    self.get_target_city(user_id)
-                    self.looking_for_persons(user_id)
-                    self.show_found_person(user_id)
+                    self.serch_users(self, params)
                     return   
 if __name__ == '__main__':
     bot = VkTools(acces_token)
