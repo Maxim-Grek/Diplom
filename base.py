@@ -87,8 +87,22 @@ class VkTools():
         res.sort(key=lambda x: x['likes']+x['comments']*10, reverse=True)
          
         return res
-
-
+    def show_found_person(self, user_id):
+        print(self.get_profile_info())
+        if self.get_profile_info() == None:
+            self.send_msg(user_id,
+                          f'Все анекты ранее были просмотрены. Будет выполнен новый поиск. '
+                          f'Измените критерии поиска (возраст, город). '
+                          f'Введите возраст поиска'
+                          f'в формате : 21-35 или конкретно 30')
+            for event in self.longpoll.listen():
+             if event.type == VkEventType.MESSAGE_NEW and event.to_me:
+                    age = event.text
+                    self.input_looking_age(user_id, age)
+                    self.get_target_city(user_id)
+                    self.looking_for_persons(user_id)
+                    self.show_found_person(user_id)
+                    return   
 if __name__ == '__main__':
     bot = VkTools(acces_token)
     params = bot.get_profile_info(789657038)
