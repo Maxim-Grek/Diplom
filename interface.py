@@ -33,28 +33,23 @@ class BotInterface():
                 if command == 'привет':
                     self.params = self.api.get_profile_info(event.user_id)
                     self.message_send(event.user_id, f'здравствуй {self.params["name"]}')
+                    
                 elif command == 'поиск':
-                    users = self.api.serch_users(self.params)
-                    user = users.pop()
+                        users = self.api.serch_users(self.params)
+                        user = users.pop()
                     
-                    photos_user = self.api.get_photos(user['id'])                  
+                        bot.info(user_id)
+                        bot.write_msg(event.user_id, f'Встречайте')
+                        bot.user_info(first_name, last_name, user_id, offset)
                     
-                    attachment = ''
-                    for num, photo in enumerate(photos_user):
-                        attachment += f'photo{photo["owner_id"]}_{photo["id"]}'
-                        if num == 2:
-                            break
-                    self.message_send(event.user_id,
-                                      f'Встречайте {user["name"]}',
-                                      attachment=attachment
-                                      ) 
-                   
-                elif command == 'пока':
-                    self.message_send(event.user_id, 'пока')
-                else:
-                    self.message_send(event.user_id, 'команда не опознана')
+                elif command == 'вперёд':
+                    for i in line:
+                        offset += 1
+                        bot.serch_users(first_name, last_name, user_id, offset)
+                        break
 
-
+                    else:
+                        bot.write_msg(event.user_id, 'Введите заново')
 
 if __name__ == '__main__':
     bot = BotInterface(comunity_token, acces_token)
