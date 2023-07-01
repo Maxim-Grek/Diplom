@@ -42,6 +42,12 @@ class BotInterface():
                         bot.write_msg(event.user_id, f'Встречайте')
                         bot.user_info(first_name, last_name, user_id, offset)
                     
+                        photos_user = self.api.get_photos(user['id'])                  
+                        attachment = ''
+                        for num, photo in enumerate(photos_user):
+                        attachment += f'photo{photo["owner_id"]}_{photo["id"]}'
+                        if num == 2:
+                           continue
                 elif command == 'вперёд':
                     for i in line:
                         offset += 1
