@@ -34,6 +34,9 @@ class BotInterface():
                     self.params = self.api.get_profile_info(event.user_id)
                     self.message_send(event.user_id, f'здравствуй {self.params["name"]}')
                     
+                elif command == 'вперёд':
+                    self.message_send(event.user_id, f'сначала начните поиск')
+                           continue
                 elif command == 'поиск':
                         users = self.api.serch_users(self.params)
                         user = users.pop()
@@ -49,8 +52,10 @@ class BotInterface():
                         if num == 2:
                            continue
                 elif command == 'вперёд':
+                    users = self.api.serch_users(self.params)
+                    user = users.pop()
                     for i in line:
-                        offset += 1
+                        offset += 30
                         bot.serch_users(first_name, last_name, user_id, offset)
                         break
 
