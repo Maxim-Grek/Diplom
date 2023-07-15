@@ -1,5 +1,5 @@
 from datetime import datetime 
-
+from vk_api.longpoll import VkLongPoll, VkEventType
 import vk_api
 
 from config import acces_token
