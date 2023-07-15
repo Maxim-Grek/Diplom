@@ -1,10 +1,7 @@
 from datetime import datetime 
-from vk_api.longpoll import VkLongPoll, VkEventType
 import vk_api
-
+from vk_api.longpoll import VkLongPoll, VkEventType
 from config import acces_token
-
-
 
 class VkTools():
     def __init__(self, acces_token):
