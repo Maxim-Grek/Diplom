@@ -95,7 +95,7 @@ class VkTools():
                           f'Измените критерии поиска (возраст, город). '
                           f'Введите возраст поиска'
                           f'в формате : 21-35 или конкретно 30')
-            for event in self.longpoll.listen():
+            for event in self.vk_api.longpoll.listen():
              if event.type == VkEventType.MESSAGE_NEW and event.to_me:
                     age = event.text
                     self.serch_users(self, params)
